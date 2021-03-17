@@ -1,0 +1,113 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(VickyApp04());
+
+class VickyApp04 extends StatelessWidget {
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'KUIS PROGRAM LOGIN',
+      routes: {
+        '/VickyApp' : (context) => VickyApp(),
+        '/HalamanKedua' : (context) => HalamanKedua(),
+        '/HalamanKetiga' : (context) => HalamanKetiga(),
+      },
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Vicky Euro Maulana (6SIB2)'),
+        ),
+        body: VickyApp(),
+      ),
+    );
+  }
+}
+
+class VickyApp extends StatefulWidget {
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<VickyApp> {
+  final txtusername = TextEditingController();
+  final txtpassword = TextEditingController();
+
+  String hasil = '';
+
+  onLogin() {
+    setState(() {
+      if (txtusername.text == "vickyeuroo" && txtpassword.text == "vicky123")
+       // hasil = "Login Berhasil";
+        Navigator.pushNamed(context, HalamanKedua.routeName);
+      else
+        //hasil = "Username atau password salah, silahkan coba lagi.";
+        Navigator.pushNamed(context, HalamanKetiga.routeName);
+    });
+  }
+  
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(20.0),
+      child: Column(
+        children: <Widget>[
+          Text("Silahkan Login Terlebih Dahulu!"),
+          SizedBox(height:20),
+          TextField(
+            controller: txtusername,
+            decoration: new InputDecoration(
+              labelText: "Username",
+              hintText: "Input username disini",
+              icon: Icon(Icons.people),
+              border: OutlineInputBorder(
+                borderRadius: new BorderRadius.circular(5.0)),
+            ),
+          ),
+          SizedBox(height:20),
+          TextField(
+            controller: txtpassword,
+            obscureText: true,
+            decoration: new InputDecoration(
+              labelText: "Password",
+              hintText: "Input password disini",
+              icon: Icon(Icons.screen_lock_portrait),
+              border: OutlineInputBorder(
+                borderRadius: new BorderRadius.circular(5.0)),
+            ),
+          ),
+          SizedBox(height:20),
+          RaisedButton(
+            child: Text("Login"),
+            onPressed: onLogin,
+          ),
+          SizedBox(height:20),
+          Text(hasil),
+        ],
+      ),
+    );
+  }
+}
+
+class HalamanKedua extends StatelessWidget {
+  static const String routeName = '/HalamanKedua';
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Login Berhasil'),
+      ),
+      body: Center(
+        child: Text('Selamat Datang!')
+        ),
+      );
+  }
+}
+
+class HalamanKetiga extends StatelessWidget {
+  static const String routeName = '/HalamanKetiga';
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Login Gagal'),
+      ),
+      body: Center(
+        child: Text('Username atau password Anda salah, silahkan coba lagi.')
+        ),
+     );
+  }
+}
