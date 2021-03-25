@@ -1,0 +1,237 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(VickyApp());
+
+class VickyApp extends StatelessWidget {
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: MenuLogin(),
+    );
+  }
+}
+
+class MenuLogin extends StatefulWidget {
+  MenuLoginState createState() => MenuLoginState();
+}
+
+class MenuLoginState extends State<MenuLogin> {
+  final txtuser = TextEditingController();
+  String username, password;
+
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.grey,
+      appBar: null,
+      body: 
+      Padding(
+        padding: EdgeInsets.only(left: 42, right: 42, top: 32, bottom: 32),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(bottom: 100),
+              child: Text(
+                'UTS - Vicky Euro Maulana',
+                style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.blue),
+              ),
+            ),
+            TextField(
+              controller: txtuser,
+              decoration: InputDecoration(
+                  prefixIcon: Icon(
+                    Icons.person,
+                    color: Colors.blue,
+                  ),
+                  hintText: 'Input NIRM Mahasiswa',
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(32)))),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 0),
+              child: Container(
+                width: 400,
+                height: 50,
+                margin: EdgeInsets.only(top: 10),
+                decoration: BoxDecoration(
+                    color: Colors.blue,
+                    borderRadius: BorderRadius.all(Radius.circular(50))),
+                child: Center(
+                  child: TextButton(
+                    onPressed: () {
+                      username = txtuser.text;
+
+                      if (username == "2018020209")
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => DataMhs()));
+                    },
+                    child: Text('MASUK',
+                               style: TextStyle(fontSize: 16.0, color: Colors.white)),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class DataMhs extends StatelessWidget {
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      
+      home: Scaffold(
+        backgroundColor: Colors.grey,
+        appBar: AppBar(
+          title: Text('Info Mahasiswa'),
+          backgroundColor: Colors.blue,
+        ),
+        //body
+       body: ListView(children: <Widget>[
+          Padding(
+              padding: const EdgeInsets.only(bottom: 32),
+            ),
+        DataTable(
+          columns: [
+            DataColumn(label: Text('Nama Mahasiswa')),
+            DataColumn(label: Text('Vicky Euro Maulana')),
+            
+          ],
+          rows: [
+            DataRow(cells: [
+              DataCell(Text('Jenis Kelamin')),
+              DataCell(Text('Laki-laki')),
+            ]),
+              DataRow(cells: [
+              DataCell(Text('Alamat')),
+              DataCell(Text('Delitua')),
+            ]),
+            DataRow(cells: [
+              DataCell(Text('Jurusan')),
+              DataCell(Text('Sistem Informasi')),
+            ]),
+          ],
+        ),
+         Padding(
+              padding: const EdgeInsets.only(top: 0),
+              child: Container(
+                width: 70,
+                height: 40,
+                margin: EdgeInsets.only(top: 32),
+                decoration: BoxDecoration(
+                    color: Colors.blue,
+                    borderRadius: BorderRadius.all(Radius.circular(50))),
+                child: Center(
+                  child: TextButton(
+                    onPressed: () {
+                      
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => ProgramMatematika()));
+                    },
+                    child: Text('Program Matematika',
+                               style: TextStyle(fontSize: 16.0, color: Colors.white)),
+                  ),
+                ),
+              ),
+            ),
+      ]),
+    ));
+    
+  }
+}
+
+class ProgramMatematika extends StatelessWidget {
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: new AppBar(
+        title: Text('Program Matematika'),
+      ),
+      body: VickyeurooApp(),
+    );
+  }
+}
+
+class VickyeurooApp extends StatefulWidget {
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<VickyeurooApp> {
+  final txtnamabarang = TextEditingController();
+  final txtjumlah = TextEditingController();
+  final txtharga = TextEditingController();
+  final txttotal = TextEditingController();
+
+  String hasil = '';
+
+  onHitung() {
+    setState(() {
+      var total = int.parse(txtjumlah.text) * int.parse(txtharga.text);
+      hasil = "Hasilnya = $total ";
+    });
+  }
+
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(30.0),
+      child: Column(
+        children: <Widget>[
+          TextField(
+            controller: txtnamabarang,
+            decoration: new InputDecoration(
+              border: OutlineInputBorder(
+                borderRadius: new BorderRadius.circular(5.0)),
+              labelText: "Nama Barang",
+              hintText: "Input nama barang",
+            ),
+          ),
+          SizedBox(height:20),
+          TextField(
+            controller: txtjumlah,
+            decoration: new InputDecoration(
+              border: OutlineInputBorder(
+                borderRadius: new BorderRadius.circular(5.0)),
+              labelText: "Jumlah Barang",
+              hintText: "Input jumlah barang",
+            ),
+          ),
+          SizedBox(height:20),
+          TextField(
+            controller: txtharga,
+            decoration: new InputDecoration(
+              border: OutlineInputBorder(
+                borderRadius: new BorderRadius.circular(5.0)),
+              labelText: "Harga Barang",
+              hintText: "Input harga barang",
+            ),
+          ),
+          Padding(
+              padding: const EdgeInsets.only(top: 0),
+              child: Container(
+                width: 200,
+                height: 40,
+                margin: EdgeInsets.only(top: 32),
+                decoration: BoxDecoration(
+                    color: Colors.blue,
+                    borderRadius: BorderRadius.all(Radius.circular(50))),
+                child: Center(
+                  child: TextButton(
+                    onPressed: onHitung,
+                    child: Text('HITUNG',
+                               style: TextStyle(fontSize: 16.0, color: Colors.white)),
+                  ),
+                ),
+              ),
+            ),
+          SizedBox(height:20),
+          Text(hasil),
+        ],
+      ),
+    );
+  }
+}
